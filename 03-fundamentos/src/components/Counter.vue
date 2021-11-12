@@ -1,6 +1,11 @@
 <template>
     <h2>{{ customTitle }} </h2>
+    <p data-testid="counter"> {{ counter }} </p> 
     <p> {{ counter }} <sup>2</sup> = {{ squareCounter }} </p>
+    <!-- 
+        Prueba con findAll
+        <p> {{ counter }} </p> 
+    -->
 
     <div>
         <button @click="increase">+1</button>
