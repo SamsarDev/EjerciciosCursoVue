@@ -3,10 +3,11 @@ import Counter from "@/components/Counter"
 
 describe('Counter Component', () => {
 
-    let wrapper
+    let wrapper, counterValue
 
     beforeEach(() => {
         wrapper = shallowMount( Counter )
+        counterValue = wrapper.find('[data-testid="counter"]').text()
     })
 
     /* test('debe hacer match con el snapshot', () => {
@@ -17,7 +18,7 @@ describe('Counter Component', () => {
 
     }) */
 
-    test('H2 debe tener el valor por defecto "Counter"', () => {
+    test('"title" en h2 debe tener el texto por defecto "Counter"', () => {
         const h2 = wrapper.find('h2')
 
         expect( h2.exists() ).toBeTruthy()
@@ -25,7 +26,15 @@ describe('Counter Component', () => {
         expect( h2.text() ).toBe('Counter')
     })    
 
-    test('El valor por defecto de Counter debe ser 100', () => {
+    test('"start" debe tener un valor por defecto', () => {
+
+        const { start } = wrapper.props()
+
+        expect( start ).toBe( Number(counterValue) )
+        
+    })
+
+    test('el valor por defecto de "start" debe ser 100', () => {
         /* 
         Prueba con findAll
 
@@ -35,12 +44,10 @@ describe('Counter Component', () => {
         expect( paragraphs[1].text() ).toBe('100')
         */
 
-        const value = wrapper.find('[data-testid="counter"]').text()
-
-        expect( value ).toBe('100')
+        expect( counterValue ).toBe('100')
     })
     
-    test('Debe incrementar y decrementar el valor de Counter', async() => {
+    test('debe incrementar y decrementar el valor de "counter"', async() => {
         const [ increaseBtn, decreaseBtn ] = wrapper.findAll('button')
 
         await increaseBtn.trigger('click') 
@@ -49,8 +56,8 @@ describe('Counter Component', () => {
         await decreaseBtn.trigger('click')
         await decreaseBtn.trigger('click')   
 
-        const value = wrapper.find('[data-testid="counter"]').text()
-        expect( value ).toBe('101') 
+        counterValue = wrapper.find('[data-testid="counter"]').text()
+        expect( counterValue ).toBe('101') 
 
     })
     
