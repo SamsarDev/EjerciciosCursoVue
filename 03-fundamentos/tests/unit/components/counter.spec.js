@@ -22,7 +22,7 @@ describe('Counter Component', () => {
 
     test('El valor por defecto de Counter debe ser 100', () => {
         const wrapper = shallowMount( Counter )
-        
+
         /* 
         Prueba con findAll
 
@@ -37,5 +37,20 @@ describe('Counter Component', () => {
         expect( value ).toBe('100')
     })
     
+    test('Debe incrementar en 1 el valor de Counter', async() => {
+        const wrapper = shallowMount( Counter )
 
+        const [ increaseBtn, decreaseBtn ] = wrapper.findAll('button')
+
+        await increaseBtn.trigger('click') 
+        await increaseBtn.trigger('click')
+        await increaseBtn.trigger('click')     
+        await decreaseBtn.trigger('click')
+        await decreaseBtn.trigger('click')   
+
+        const value = wrapper.find('[data-testid="counter"]').text()
+        expect( value ).toBe('101') 
+
+    })
+    
 })
