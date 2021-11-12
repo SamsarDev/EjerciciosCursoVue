@@ -18,14 +18,6 @@ describe('Counter Component', () => {
 
     }) */
 
-    test('"title" en h2 debe tener el texto por defecto "Counter"', () => {
-        const h2 = wrapper.find('h2')
-
-        expect( h2.exists() ).toBeTruthy()
-
-        expect( h2.text() ).toBe('Counter')
-    })    
-
     test('"start" debe tener un valor por defecto', () => {
 
         const { start } = wrapper.props()
@@ -61,4 +53,24 @@ describe('Counter Component', () => {
 
     })
     
+    test('"title" en h2 debe tener el texto por defecto "Counter"', () => {
+        const h2 = wrapper.find('h2')
+
+        expect( h2.exists() ).toBeTruthy()
+
+        expect( h2.text() ).toBe('Counter')
+    })    
+
+    test('debe actualizar la propiedad "title"', () => {
+        const title = 'Hola mundo!!!'
+        const wrapper = shallowMount( Counter, {
+            props: {
+                title
+            }
+        })
+
+        expect( wrapper.find('h2').text() ).toBe( title )
+    })
+    
+
 })
