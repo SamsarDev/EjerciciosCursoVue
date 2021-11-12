@@ -3,6 +3,12 @@ import Counter from "@/components/Counter"
 
 describe('Counter Component', () => {
 
+    let wrapper
+
+    beforeEach(() => {
+        wrapper = shallowMount( Counter )
+    })
+
     /* test('debe hacer match con el snapshot', () => {
 
         const wrapper = shallowMount( Counter )
@@ -12,7 +18,6 @@ describe('Counter Component', () => {
     }) */
 
     test('H2 debe tener el valor por defecto "Counter"', () => {
-        const wrapper = shallowMount( Counter )
         const h2 = wrapper.find('h2')
 
         expect( h2.exists() ).toBeTruthy()
@@ -21,8 +26,6 @@ describe('Counter Component', () => {
     })    
 
     test('El valor por defecto de Counter debe ser 100', () => {
-        const wrapper = shallowMount( Counter )
-
         /* 
         Prueba con findAll
 
@@ -37,9 +40,7 @@ describe('Counter Component', () => {
         expect( value ).toBe('100')
     })
     
-    test('Debe incrementar en 1 el valor de Counter', async() => {
-        const wrapper = shallowMount( Counter )
-
+    test('Debe incrementar y decrementar el valor de Counter', async() => {
         const [ increaseBtn, decreaseBtn ] = wrapper.findAll('button')
 
         await increaseBtn.trigger('click') 
